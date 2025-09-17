@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos de Matemática</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            flex-wrap: nowrap;
+        }
+
+        header > div:last-child {
+            margin-left: auto;
+        }
+
+        /* Grupo do logo e título */
+        .logo-titulo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Logo */
+        .logo img {
+            width: 120px;
+            transition: all 0.5s ease;
+        }
+
+        /* Nome do projeto */
+        #titulo {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+            text-align: left;
+            white-space: nowrap;
+            transition: all 0.5s ease;
+        }
+
+        /* Menu alinhado à direita */
+        header nav {
+            display: flex;
+            gap: 15px;
+            justify-content: auto;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Quando rolar a tela ===== */
+        .scrolled header .logo {
+            display: none;
+        }
+        .scrolled #titulo {
+            font-size: 20px;
+        }
+        .scrolled header {
+            padding: 10px 20px;
+        }
+
+        /* ===== Responsividade ===== */
+        @media (max-width: 1000px) {
+            .logo-titulo {
+                gap: 10px;
+            }
+            .logo img {
+                width: 100px;
+            }
+            #titulo {
+                font-size: 22px;
+            }
+            header {
+                padding: 20px 10px;
+            }
+            header nav {
+                gap: 8px;
+            }
+            header nav a {
+                font-size: 14px;
+            }
+        }
+        
+        /* === AJUSTES PARA TELAS MENORES (CELULARES) === */
+        @media (max-width: 800px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+            header > div:last-child {
+                margin-left: 0;
+            }
+            header nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 10px;
+                margin-left: 0;
+            }
+            .logo-titulo {
+                margin-bottom: 10px;
+            }
+
+            /* NOVO: Ajusta a margem do conteúdo principal para o header maior */
+            main {
+                margin-top: 230px; 
+            }
+
+            /* NOVO: Faz os cards dos jogos se empilharem */
+            .jogos {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .jogo {
+                max-width: 90%; /* Evita que o card fique muito largo em telas intermediárias */
+            }
+        }
+
+        /* ===== MAIN ===== */
+        main {
+            margin: 140px auto 30px; /* Margem padrão para telas maiores */
+            max-width: 1100px;
+            padding: 0 20px;
+            transition: margin-top 0.5s ease; /* Adiciona transição suave na margem */
+        }
+
+        .info-jogos {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .info-jogos h2 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+
+        .jogos {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .jogo {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+            flex: 1;
+            max-width: 48%;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .jogo:hover {
+            transform: scale(1.05);
+        }
+        .jogo img {
+            width: 100%;
+            height: auto;
+            max-height: 220px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #f3f3f3;
+        }
+        .jogo a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        section {
+            margin: 40px 0;
+        }
+        section h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 10px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" style="width: auto; height: auto;"> 
+            </div>
+            <h1 id="titulo">Matemática em Jogo</h1>
+        </div>
+        <div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#download">Download</a>
+                <a href="#projeto">Projeto</a>
+                <a href="#objetivos">Objetivos</a>
+                <a href="#autores">Autores</a>
+                <a href="#contato">Contato</a>
+                <a href="#contato" style="color: #4CAF50;">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home">
+        <section class="info-jogos">
+            <h2>Informações dos Jogos</h2>
+            <p>Foram criados dois jogos digitais para tornar a matemática mais divertida e interativa:</p>
+            <ul>
+                <li><strong>Labirinto das Operações Básicas:</strong> Desafios com adição, subtração, multiplicação e divisão.</li>
+                <li><strong>Os Monstros Matemáticos:</strong> Um jogo voltado para expressões algébricas.</li>
+            </ul>
+
+            <div class="jogos">
+                <a href="labirinto.html">
+                    <div class="jogo">
+                        <img src="labirinto.png" alt="Imagem do jogo Labirinto das Operações Básicas">
+                        <a href="labirinto.html">Labirinto das Operações Básicas</a>
+                    </div>
+                </a>
+                <a href="monstros.html">
+                    <div class="jogo">
+                        <img src="monstros.png" alt="Imagem do jogo Os Monstros Matemáticos">
+                        <a href="monstros.html">Os Monstros Matemáticos</a>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="download">
+            <h2>Download dos Jogos Originais</h2>
+            <p>Aqui você pode baixar os arquivos originais dos jogos criados no <strong>Scratch 3</strong>.
+               Basta clicar nos links abaixo para iniciar o download automaticamente.</p>
+            <ul>
+                <li><a href="labirinto.sb3" download>Baixar Labirinto das Operações Básicas (.sb3)</a></li>
+                <li><a href="monstros.sb3" download>Baixar Os Monstros Matemáticos (.sb3)</a></li>
+            </ul>
+        </section>
+
+        <section id="projeto">
+            <h2>Sobre o Projeto</h2>
+            <p>
+                O projeto <strong>Gamificação nas aulas de matemática</strong> foi desenvolvido para a
+                <strong>Feira de Ciências de Jijoca de Jericoacoara-CE</strong>. Ele busca utilizar jogos digitais
+                educativos para tornar as aulas de matemática mais atrativas e motivadoras, aliando tecnologia,
+                programação e gamificação ao processo de ensino-aprendizagem.
+            </p>
+        </section>
+
+        <section id="objetivos">
+            <h2>Objetivos</h2>
+            <p><strong>Objetivo Geral:</strong> Analisar como a utilização de jogos digitais pode contribuir para a aprendizagem e motivação dos alunos nas aulas de matemática.</p>
+            <p><strong>Objetivos Específicos:</strong></p>
+            <ul>
+                <li>Desenvolver jogos digitais na plataforma Scratch para conteúdos de operações básicas e expressões algébricas.</li>
+                <li>Aplicar os jogos em turmas do Ensino Fundamental II e avaliar sua eficácia pedagógica.</li>
+                <li>Investigar a percepção dos estudantes quanto à motivação, interesse e compreensão dos conteúdos.</li>
+            </ul>
+        </section>
+
+        <section id="autores">
+            <h2>Autores do Projeto</h2>
+            <p><strong>Estudantes:</strong> Ariell Pyetro Ferreira e Arthur Gomes Araújo</p>
+            <p><strong>Professores Orientadores:</strong> Antônio Ronaldo da Silva e Maria Regina de V. Fonteles</p>
+            <p><em>E.E.F.M. Professora Silvia Helena de Araújo</em></p>
+        </section>
+
+        <section id="contato">
+            <h2>Contato</h2>
+            <p>E-mail: <a href="mailto:ronaldjijoca@gmail.com">ronaldjijoca@gmail.com</a></p>
+            <p>E-mail: <a href="mailto:reginafonteles644@gmail.com">reginafonteles644@gmail.com</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Projeto Gamificação nas aulas de Matemática | Feira de Ciências - Jijoca de Jericoacoara-CE</p>
+    </footer>
+
+    <script>
+        // Detecta rolagem e aplica a classe "scrolled"
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 50) {
+                document.body.classList.add("scrolled");
+            } else {
+                document.body.classList.remove("scrolled");
+            }
+        });
+    </script>
+</body>
+</html>
